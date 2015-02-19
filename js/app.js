@@ -34,10 +34,17 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
-	$scope.rooms =  ['Room 1','Room 2','Room 3','Room 4','Room 5'];
+	$scope.rooms =  [];//['Room 1','Room 2','Room 3','Room 4','Room 5'];
 	$scope.currentUser = $routeParams.user;
 	$scope.hidden = true;
-	$scope.roomname = '';
+
+	socket.emit('rooms');
+	socket.on('roomlist', function (roomser) {
+		for(var room in roomser){
+			$scope.rooms.push(room);
+		}
+	});
+
 	//New Room button clicked, user wants to create a new rooom 
 	$scope.newRoom = function(){
 		console.log("I clicked on das Button");
@@ -46,7 +53,17 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.submitRoom = function(){
 			console.log("here");
 		$scope.rooms.push($scope.roomname);
-
+		var newRoomObj = {
+			room: $scope.roomname
+			//pass : $scope.pass
+		};
+		socket.emit('joinroom', newRoomObj, function (success, reason){
+			if (!success){
+				$scope.errorMessage = reason;
+			}
+			else
+				console.log("ekkert ves");
+		});
 	};
 });
 
