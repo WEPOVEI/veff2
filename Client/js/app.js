@@ -107,4 +107,8 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		}
 	};
 
+	$scope.returnLobby = function(){
+		socket.emit('partroom', $scope.currentRoom);
+		$location.path('/rooms/' + $scope.nickname);
+	};
 });
