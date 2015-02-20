@@ -41,7 +41,9 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	socket.emit('rooms');
 	socket.on('roomlist', function (roomser) {
 		for(var room in roomser){
-			$scope.rooms.push(room);
+			if(room != "lobby"){
+				$scope.rooms.push(room);
+			}				
 		}
 	});
 
