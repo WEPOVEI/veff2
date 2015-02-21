@@ -1,6 +1,6 @@
 var ChatClient = angular.module('ChatClient', ['ngRoute']);
 
-// Allows us to execute code after ngrepear
+// Allows us to execute code after ngrepeat
 ChatClient.directive('onFinishRender', function ($timeout) {
     return {
         restrict: 'A',
@@ -95,9 +95,12 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
 
+<<<<<<< HEAD
 	/*$(document).ready(function(){
 	    $(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
 	});*/
+=======
+>>>>>>> 8a129b0d883760e6be8868db3e90310b91595bd2
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -135,19 +138,39 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 
 	$scope.model = { selected : ""};
+
 	$scope.doSelect = function(val){
 		console.log("here");
 		$scope.model.selected = val;
 		var kick = confirm("Are you sure you want to kick " + val + "?");
-		console.log(val);
+		
 		if(kick === true){
-			console.log("i'm kicking");
+			console.log("i'm kicking " + val);
+
+			kickObj={
+				user: val,
+				room: $scope.currentRoom
+			};
+
+			socket.emit('kick', kickObj, function (kicked){
+				console.log("emitting bitch");
+				if(kicked){
+					console.log("he shouldn't be on the list any longer")
+					 //check if nickname catches correct user
+					 
+				}else{
+					alert("only ops can kick other users"); //TODO: point to op if he want's someone kicked out
+				}
+
+			});
 		}
-
 	};
+	//user that has been kicked by op should be redirected to lobby
+	socket.on('kicked', function (room, kickeduser, operator){
+		console.log("cicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
+		$location.path('/rooms/' + kickeduser);
+	});
 
-
-//});
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	
