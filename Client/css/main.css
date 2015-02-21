@@ -1,0 +1,14 @@
+.chatlist {
+	height: 450px; 
+	overflow: auto;
+}
+
+.users {
+	height: 150px; 
+	overflow: auto;
+}
+
+.pmlist {
+	height: 250px; 
+	overflow: auto;
+}

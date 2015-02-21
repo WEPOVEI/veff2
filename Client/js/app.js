@@ -1,5 +1,19 @@
 var ChatClient = angular.module('ChatClient', ['ngRoute']);
 
+// Allows us to execute code after ngrepear
+ChatClient.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+});
+
 ChatClient.config(
 	function ($routeProvider) {
 		$routeProvider
@@ -77,7 +91,16 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.comment = '';
 	$scope.emptyComment = '';
 	$scope.commentHistory = [];
+<<<<<<< HEAD
 	$scope.hide = true;
+=======
+	$scope.errorPM = '';
+	$scope.pmHistory = [];
+
+	/*$(document).ready(function(){
+	    $(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
+	});*/
+>>>>>>> master
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -105,6 +128,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 					msg : $scope.comment
 			};
 			socket.emit('sendmsg', objMessage);
+			$('#comment').val('');
 		}
 	};
 
@@ -113,6 +137,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		$location.path('/rooms/' + $scope.nickname);
 	};
 
+<<<<<<< HEAD
 	$scope.model = { selected : ""};
 	$scope.doSelect = function(val){
 		console.log("here");
@@ -127,3 +152,40 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 
 });
+=======
+	$scope.sendPM = function(){
+		console.log("pmTo " + $scope.pmTo);
+		console.log("pm " + $scope.pm);	
+
+		if($scope.pm === '') {
+			$scope.emptyComment = 'Please write a comment!';
+		}else {
+			var pmObj = {
+				nick : $scope.pmTo,
+				message : $scope.pm
+			};
+			socket.emit('privatemsg', pmObj, function (success){
+				if(!success){
+					$scope.errorPM = "Cannot send message";
+				}
+			});
+			$('#pm').val('');
+		}
+	};
+	socket.on('recv_privatemsg', function (username, message){
+		console.log("recv");
+		console.log(username + "fekk message");
+		var pm = {
+			nick : username,
+			message : message
+		};
+		$scope.pmHistory.push(pm);
+	});
+
+	$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+		// Sets the scrollbars at the bottom 
+    	$(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
+    	$(".pmlist").scrollTop($(".pmlist")[0].scrollHeight);
+	});
+});
+>>>>>>> master

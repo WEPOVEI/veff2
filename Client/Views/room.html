@@ -6,34 +6,34 @@
 <div class="col-md-9">
 	<button type="button" class="btn btn-primary" ng-click="returnLobby()">Return to lobby</button>
 	<div class="well">
-		<ul class="media-list">
-		    <li class="media" ng-repeat="comment in commentHistory">
-		      <a class="pull-left" href="#">
-		         <img class="media-object" src="http://www.adweek.com/socialtimes/files/2014/08/anonymous.jpg" 
-		         alt="Generic placeholder image" height="42" width="65">
-		      </a>
-		      <div class="media-body">
-		         <h4 class="media-heading">{{comment.nick}}</h4>
-		         <p>{{comment.message}}</p>
-		         <span class="date sub-text">{{comment.timestamp}}</span>
-		      </div>
-		   </li>
-		</ul>
+		<div class="chatlist">
+			<ul class="media-list">
+			    <li class="media" ng-repeat="comment in commentHistory" on-finish-render="ngRepeatFinished">
+			      <a class="pull-left" href="#">
+			         <img class="media-object" src="http://www.adweek.com/socialtimes/files/2014/08/anonymous.jpg" 
+			         alt="Generic placeholder image" height="42" width="65">
+			      </a>
+			      <div class="media-body">
+			         <h4 class="media-heading">{{comment.nick}}</h4>
+			         <p>{{comment.message}}</p>
+			         <span class="date sub-text">{{comment.timestamp}}</span>
+			      </div>
+			   </li>
+			</ul>
+		</div>
 
 		<label for="comment" class"control-label">Add comment</label>
 		<input type="text" class="form-control" id="comment" ng-model="comment" />
-
 	</div>
 	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
 		{{emptyComment}}
 	</div>
 	<button type="button" class="btn btn-primary" ng-click="addComment()">Add Comment</button>
-	
-
-
 </div>
+
 <div class="col-md-3">
 	<h4>Users in this room</h4>
+<<<<<<< HEAD
 	<div class="well">	
 		<ul>
 			<li ng-repeat="user in currentUsers">{{user}}
@@ -53,5 +53,48 @@
 				</span>
 			</li>
 		</ul>
+=======
+	<div class="well">
+		<div class="users">
+			<ul>
+				<li ng-repeat="user in currentUsers">{{user}}</li>
+			</ul>
+		</div>
+>>>>>>> master
 	</div>
 </div>
+
+	<!-- Private msg gluggi -->
+<div class="col-md-3">
+	<h4>Private messages</h4>
+	<div class="well">
+		<div class="pmlist">
+			<ul class="media-list">
+			    <li class="media" ng-repeat="pm in pmHistory" on-finish-render="ngRepeatFinished"> <!-- Saekir oll private msg -->
+			      <a class="pull-left" href="#">
+			         <img class="media-object" src="http://www.adweek.com/socialtimes/files/2014/08/anonymous.jpg" 
+			         alt="Generic placeholder image" height="42" width="65">
+			      </a>
+			      <div class="media-body">
+			         <h4 class="media-heading">{{pm.nick}}</h4>
+			         <p>{{pm.message}}</p>
+			         <span class="date sub-text">{{comment.timestamp}}</span>
+			      </div>
+			   </li>
+			</ul>
+		</div>
+
+		<label for="comment" class"control-label">Send private message to:</label>
+
+		<select ng-model="pmTo">
+			<option ng-repeat="user in currentUsers" value="{{user}}">{{user}}</option>
+		</select>
+
+		<input type="text" class="form-control" id="pm" ng-model="pm" />
+	</div>
+	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
+		{{emptyComment}}
+	</div>
+	<button type="button" class="btn btn-primary" ng-click="sendPM()">Send message</button>
+</div>
+	<!-- Private msg gluggi  endar-->
