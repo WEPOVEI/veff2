@@ -1,5 +1,19 @@
 var ChatClient = angular.module('ChatClient', ['ngRoute']);
 
+// Allows us to execute code after ngrepear
+ChatClient.directive('onFinishRender', function ($timeout) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                });
+            }
+        }
+    }
+});
+
 ChatClient.config(
 	function ($routeProvider) {
 		$routeProvider
@@ -80,6 +94,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
 
+	/*$(document).ready(function(){
+	    $(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
+	});*/
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -107,6 +124,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 					msg : $scope.comment
 			};
 			socket.emit('sendmsg', objMessage);
+			$('#comment').val('');
 		}
 	};
 
@@ -119,7 +137,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	
 
-
 		if($scope.pm === '') {
 			$scope.emptyComment = 'Please write a comment!';
 		}else {
@@ -131,10 +148,8 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 				if(!success){
 					$scope.errorPM = "Cannot send message";
 				}
-				else{
-					console.log("pm virkar");
-				}
 			});
+			$('#pm').val('');
 		}
 	};
 	socket.on('recv_privatemsg', function (username, message){
@@ -145,5 +160,11 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			message : message
 		};
 		$scope.pmHistory.push(pm);
+	});
+
+	$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
+		// Sets the scrollbars at the bottom 
+    	$(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
+    	$(".pmlist").scrollTop($(".pmlist")[0].scrollHeight);
 	});
 });
