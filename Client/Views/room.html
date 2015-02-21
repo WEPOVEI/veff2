@@ -4,7 +4,7 @@
 
 <h3>Hi {{currentUser}} - Room {{currentRoom}}</h3>
 <div class="col-md-9">
-	TODO - display chat
+	<button type="button" class="btn btn-primary" ng-click="returnLobby()">Return to lobby</button>
 	<div class="well">
 		<ul class="media-list">
 		    <li class="media" ng-repeat="comment in commentHistory">
@@ -22,13 +22,42 @@
 
 		<label for="comment" class"control-label">Add comment</label>
 		<input type="text" class="form-control" id="comment" ng-model="comment" />
-
 	</div>
 	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
 		{{emptyComment}}
 	</div>
 	<button type="button" class="btn btn-primary" ng-click="addComment()">Add Comment</button>
-	
+
+	<!-- Private msg gluggi -->
+	<div class="well">
+		<h2>Private messages</p>
+		<ul class="media-list">
+		    <li class="media" ng-repeat="pm in pmHistory"> <!-- Saekir oll private msg -->
+		      <a class="pull-left" href="#">
+		         <img class="media-object" src="http://www.adweek.com/socialtimes/files/2014/08/anonymous.jpg" 
+		         alt="Generic placeholder image" height="42" width="65">
+		      </a>
+		      <div class="media-body">
+		         <h4 class="media-heading">{{pm.nick}}</h4>
+		         <p>{{pm.message}}</p>
+		         <span class="date sub-text">{{comment.timestamp}}</span>
+		      </div>
+		   </li>
+		</ul>
+
+		<label for="comment" class"control-label">Send private message to:</label>
+
+		<select ng-model="pmTo">
+			<option ng-repeat="user in currentUsers" value="{{user}}">{{user}}</option>
+		</select>
+
+		<input type="text" class="form-control" id="pm" ng-model="pm" />
+	</div>
+	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
+		{{emptyComment}}
+	</div>
+	<button type="button" class="btn btn-primary" ng-click="sendPM()">Send message</button>
+	<!-- Private msg gluggi  endar-->
 
 
 </div>

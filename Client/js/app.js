@@ -41,7 +41,9 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	socket.emit('rooms');
 	socket.on('roomlist', function (roomser) {
 		for(var room in roomser){
-			$scope.rooms.push(room);
+			if(room != "lobby"){
+				$scope.rooms.push(room);
+			}				
 		}
 	});
 
@@ -75,6 +77,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.comment = '';
 	$scope.emptyComment = '';
 	$scope.commentHistory = [];
+	$scope.errorPM = '';
+	$scope.pmHistory = [];
+
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -105,4 +110,40 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		}
 	};
 
+	$scope.returnLobby = function(){
+		socket.emit('partroom', $scope.currentRoom);
+		$location.path('/rooms/' + $scope.nickname);
+	};
+
+	$scope.sendPM = function(){
+		console.log("pmTo " + $scope.pmTo);
+		console.log("pm " + $scope.pm);	
+
+
+		if($scope.pm === '') {
+			$scope.emptyComment = 'Please write a comment!';
+		}else {
+			var pmObj = {
+				nick : $scope.pmTo,
+				message : $scope.pm
+			};
+			socket.emit('privatemsg', pmObj, function (success){
+				if(!success){
+					$scope.errorPM = "Cannot send message";
+				}
+				else{
+					console.log("pm virkar");
+				}
+			});
+		}
+	};
+	socket.on('recv_privatemsg', function (username, message){
+		console.log("recv");
+		console.log(username + "fekk message");
+		var pm = {
+			nick : username,
+			message : message
+		};
+		$scope.pmHistory.push(pm);
+	});
 });
