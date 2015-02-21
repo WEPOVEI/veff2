@@ -113,7 +113,17 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		$location.path('/rooms/' + $scope.nickname);
 	};
 
-	$scope.interact = function(){
-		$scope.hide = !$scope.hide;
+	$scope.model = { selected : ""};
+	$scope.doSelect = function(val){
+		console.log("here");
+		$scope.model.selected = val;
+		var kick = confirm("Are you sure you want to kick " + val + "?");
+		console.log(val);
+		if(kick === true){
+			console.log("i'm kicking");
+		}
+
 	};
+
+
 });
