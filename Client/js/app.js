@@ -147,7 +147,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 
 
-});
+//});
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	

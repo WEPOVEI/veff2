@@ -112,9 +112,18 @@ io.sockets.on('connection', function (socket) {
 
 		if(userAllowed) {
 			//Update the message history for the room that the user sent the message to.
+			var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			var formattedDate = new Date();
+			var d = formattedDate.getDate();
+			var m =  months[formattedDate.getMonth()];
+			m += 1;  // JavaScript months are 0-11
+			var y = formattedDate.getFullYear();
+			var date = d + "." + m + "." + y;
+
+			var momentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
 			var messageObj = {
 				nick : socket.username,
-				timestamp :  new Date(),
+				timestamp :  momentDate, //new Date(),
 				message : data.msg.substring(0, 200)
 			};
 			rooms[data.roomName].addMessage(messageObj);
