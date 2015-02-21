@@ -95,12 +95,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
 
-<<<<<<< HEAD
-	/*$(document).ready(function(){
-	    $(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
-	});*/
-=======
->>>>>>> 8a129b0d883760e6be8868db3e90310b91595bd2
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
