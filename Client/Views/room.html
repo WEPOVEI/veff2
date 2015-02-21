@@ -36,7 +36,22 @@
 	<h4>Users in this room</h4>
 	<div class="well">	
 		<ul>
-			<li ng-repeat="user in currentUsers">{{user}}</li>
+			<li ng-repeat="user in currentUsers">{{user}}
+				<span class="btn-group">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+						Interact
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Send private msg</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Kick</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Ban</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Op</a></li>
+						</ul>
+					</div>
+				</span>
+			</li>
 		</ul>
 	</div>
 </div>

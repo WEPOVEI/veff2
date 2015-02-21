@@ -50,7 +50,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	//New Room button clicked, user wants to create a new rooom 
 	$scope.newRoom = function(){
 		console.log("I clicked on das Button");
-		$scope.hidden = !$scope.hidden;
+		$scope.hidden = !$scope.hidden; //show/hide
 	};
 	$scope.submitRoom = function(){
 			console.log("here");
@@ -77,6 +77,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.comment = '';
 	$scope.emptyComment = '';
 	$scope.commentHistory = [];
+	$scope.hide = true;
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -110,5 +111,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.returnLobby = function(){
 		socket.emit('partroom', $scope.currentRoom);
 		$location.path('/rooms/' + $scope.nickname);
+	};
+
+	$scope.interact = function(){
+		$scope.hide = !$scope.hide;
 	};
 });
