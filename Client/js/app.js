@@ -91,16 +91,13 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.comment = '';
 	$scope.emptyComment = '';
 	$scope.commentHistory = [];
-<<<<<<< HEAD
 	$scope.hide = true;
-=======
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
 
 	/*$(document).ready(function(){
 	    $(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
 	});*/
->>>>>>> master
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -137,7 +134,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		$location.path('/rooms/' + $scope.nickname);
 	};
 
-<<<<<<< HEAD
 	$scope.model = { selected : ""};
 	$scope.doSelect = function(val){
 		console.log("here");
@@ -152,7 +148,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 
 });
-=======
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	
@@ -188,4 +183,3 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
     	$(".pmlist").scrollTop($(".pmlist")[0].scrollHeight);
 	});
 });
->>>>>>> master
