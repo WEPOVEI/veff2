@@ -162,7 +162,10 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	//user that has been kicked by op should be redirected to lobby
 	socket.on('kicked', function (room, kickeduser, operator){
 		console.log("cicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
-		$location.path('/rooms/' + kickeduser);
+		if(kickeduser === $scope.currentUser){
+			console.log("inside kicked" + "current user is "+ kickeduser);
+			$location.path('/rooms/' + kickeduser);
+		}
 	});
 
 	$scope.sendPM = function(){
