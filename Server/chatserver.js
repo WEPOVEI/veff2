@@ -116,14 +116,22 @@ io.sockets.on('connection', function (socket) {
 			var formattedDate = new Date();
 			var d = formattedDate.getDate();
 			var m =  months[formattedDate.getMonth()];
-			m += 1;  // JavaScript months are 0-11
 			var y = formattedDate.getFullYear();
-			var date = d + "." + m + "." + y;
 
-			var momentDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+			var hour = formattedDate.getHours().toString();
+			var min = formattedDate.getMinutes().toString();
+
+			if(hour.length < 2){
+				hour = "0" + hour;
+			}
+			if(min.length < 2){
+				min = "0" + min;
+			}
+			var date = d + ". " + m + ". " + y + ". " + hour + ":" + min;
+
 			var messageObj = {
 				nick : socket.username,
-				timestamp :  momentDate, //new Date(),
+				timestamp :  date, //new Date(),
 				message : data.msg.substring(0, 200)
 			};
 			rooms[data.roomName].addMessage(messageObj);
