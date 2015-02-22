@@ -134,7 +134,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.model = { selected : ""};
 
 	$scope.doSelect = function(val){
-		console.log("here");
 		$scope.model.selected = val;
 		var kick = confirm("Are you sure you want to kick " + val + "?");
 		
@@ -167,7 +166,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$location.path('/rooms/' + kickeduser);
 		}
 	});
-
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	
