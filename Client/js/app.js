@@ -70,7 +70,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	};
 	$scope.submitRoom = function(){
 			console.log("here");
-		$scope.rooms.push($scope.roomname);
+		//$scope.rooms.push($scope.roomname);
 		var newRoomObj = {
 			room: $scope.roomname
 			//pass : $scope.pass
@@ -79,10 +79,19 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			if (!success){
 				$scope.errorMessage = reason;
 			}
-			else
-				console.log("ekkert ves");
 		});
+		$('#newRoom').val('');
 	};
+
+	socket.on('updateRooms', function (room){
+		if(room !== undefined){
+			console.log("adding room");
+			$scope.rooms.push(room);
+		}
+		else{
+			console.log("not adding room");
+		}
+	});
 
 
 	console.log("LESU MIG " + $routeParams.user + " " + $rootScope.sparkad);
