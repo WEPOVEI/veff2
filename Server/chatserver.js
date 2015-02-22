@@ -58,6 +58,8 @@ io.sockets.on('connection', function (socket) {
 			//Update topic
 			socket.emit('updatetopic', room, rooms[room].topic, socket.username);
 			io.sockets.emit('servermessage', "join", room, socket.username);
+			//Send room name to all users
+			io.sockets.emit('updateRooms', room);
 		}
 		else {
 
