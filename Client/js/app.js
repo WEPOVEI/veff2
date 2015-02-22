@@ -134,7 +134,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.model = { selected : ""};
 
 	$scope.doSelect = function(val){
-		console.log("here");
 		$scope.model.selected = val;
 		var kick = confirm("Are you sure you want to kick " + val + "?");
 		
@@ -162,9 +161,11 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	//user that has been kicked by op should be redirected to lobby
 	socket.on('kicked', function (room, kickeduser, operator){
 		console.log("cicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
-		$location.path('/rooms/' + kickeduser);
+		if(kickeduser === $scope.currentUser){
+			console.log("inside kicked" + "current user is "+ kickeduser);
+			$location.path('/rooms/' + kickeduser);
+		}
 	});
-
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);
 		console.log("pm " + $scope.pm);	
