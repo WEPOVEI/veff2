@@ -227,12 +227,13 @@ io.sockets.on('connection', function (socket) {
 	socket.on('deop', function (deopObj, fn) {
 		console.log(socket.username + " deopped " + deopObj.user + " from " + deopObj.room);
 		//If user is OP
-		if(rooms[deopObj.room].ops[socket.username] !== undefined) {
+		if(rooms[deopObj.room].ops[socket.username] !== undefined && rooms[deopObj.room].ops[deopObj.user] !== undefined) {
 			//Remove the user from the room op roster.
 			delete rooms[deopObj.room].ops[deopObj.user];
 			//Add the user to the room roster.
 			rooms[deopObj.room].users[deopObj.user] = deopObj.user;
 			//Broadcast to the room who got opped.
+
 			io.sockets.emit('deopped', deopObj.room, deopObj.user, socket.username);
 			//Update user list for room.
 			io.sockets.emit('updateusers', deopObj.room, rooms[deopObj.room].users, rooms[deopObj.room].ops);
