@@ -49,10 +49,11 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 	socket.emit('users');
 	socket.on('userlist', function (listofusers){
 		console.log("userlist listening");
-		for(var us in listofusers){
+		/*for(var us in listofusers){
 			console.log(us);
 			$scope.activeusers.push(us);
-		}
+		}*/
+		$scope.activeusers = listofusers;
 	});
 });
 
