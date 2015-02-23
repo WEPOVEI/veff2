@@ -30,6 +30,7 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 	
 	$scope.errorMessage = '';
 	$scope.nickname = '';
+	$scope.activeusers = [];
 
 	$scope.login = function() {			
 		if ($scope.nickname === '') {
@@ -44,6 +45,15 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 			});			
 		}
 	};
+
+	socket.emit('users');
+	socket.on('userlist', function (listofusers){
+		console.log("userlist listening");
+		for(var us in listofusers){
+			console.log(us);
+			$scope.activeusers.push(us);
+		}
+	});
 });
 
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
@@ -53,7 +63,6 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.hidden = true;
 	$scope.kickedmessage = true; 
 	$scope.bannedmessage = true;
-	$scope.activeusers = [];
 	
 
 
@@ -120,6 +129,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
 	$scope.selfkick = true;
+	$scope.oppedmessage = true;
 /* scope variables for kicked function */
 	
 
@@ -172,6 +182,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		}
 
 		else{
+			/*warning message if current user tries to kick himself */
 			$scope.selfkick = false;
 		}
 
@@ -231,6 +242,31 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$location.path('/rooms/' + banneduser);
 		}
 	});
+
+	$scope.opUser = function (user){
+
+		var opuser = confirm("do you want to op " + user + "?");
+		if(opuser === true){
+			opObj = {
+				user: user,
+				room: $scope.currentRoom
+			};
+			socket.emit('op', opObj, function (opped){
+				if(!opped){
+					alert("Error occured, only ops can op another users");
+				}
+			});
+		}
+	};
+	socket.on('opped', function (room, oppeduser, operator){
+		console.log("received opp");
+		if(oppeduser === $scope.currentUser){
+			$scope.oppedmessage = false;
+		}
+
+	});
+
+
 
 	$scope.sendPM = function(){
 		console.log("pmTo " + $scope.pmTo);

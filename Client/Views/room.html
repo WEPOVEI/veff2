@@ -30,6 +30,14 @@
 	</div>
 	<button type="button" class="btn btn-primary" ng-click="addComment()">Add Comment</button>
 </div>
+<!--new for opped users-->
+<div class="col-md-3">
+	<div class="alert alert-info" role="alert" ng-hide="oppedmessage">
+  		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+  		<span class="sr-only">Error</span>
+  		Congratulations! You are now officially an operator of this room. But remember, with great power comes great responsibility!
+	</div>
+</div>
 
 <div class="col-md-3">
 	<h4>Users in this room</h4>
@@ -43,9 +51,9 @@
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-							<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="kickUser(user)">Kick</a></li>
+							<li role="presentation"><a id="lefty" role="menuitem" tabindex="-1" ng-click="kickUser(user)" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Kick</a></li>
 							<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="banUser(user)">Ban</a></li>
-							<li role="presentation"><a role="menuitem" tabindex="-1">Op</a></li>
+							<li role="presentation"><a role="menuitem" tabindex="-1" ng-click="opUser(user)">Op</a></li>
 						</ul>
 					</div>
 				</span>
