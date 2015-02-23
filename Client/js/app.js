@@ -129,7 +129,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.pmHistory = [];
 	$scope.selfkick = true;
 	$scope.oppedmessage = true;
-/* scope variables for kicked function */
+  	$scope.deopped = '';
 	
 
 
@@ -267,6 +267,26 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	});
 
+	$scope.deopUser = function (user){
+		var deopuser = confirm("you are about to deop " + user  +". Are you sure you want to proceed?" + user + " will lose all op privileges.");
+		if(deopuser === true){
+			deopObj = {
+				user : user,
+				room: $scope.currentRoom
+			};
+			socket.emit('deop', deopObj, function (deopped){
+				if(!deopped){
+					alert("Error occured, only ops can deop");
+				}
+			});
+		}
+	};
+	socket.on('deop', function (room, deoppeduser, operator){
+		console.log("listening to deop");
+		if(deoppeduser === $scope.currentUser){
+			$scope.deopped = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
+		}
+	});
 
 
 	$scope.sendPM = function(){
