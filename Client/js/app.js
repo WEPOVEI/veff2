@@ -52,6 +52,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.currentUser = $routeParams.user;
 	$scope.hidden = true;
 	$scope.kickedmessage = true; 
+	$scope.bannedmessage = true;
 
 
 	socket.emit('rooms');
@@ -83,13 +84,16 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 				console.log("ekkert ves");
 		});
 	};
-
-
-	console.log("LESU MIG " + $routeParams.user + " " + $rootScope.sparkad);
+	/* show warning for kicked user*/
 	if($routeParams.user === $rootScope.sparkad){
 		console.log("jallajallajallajalla");
 		$scope.kickedmessage = false;
 		$rootScope.sparkad = undefined;
+	}
+	/*show warning for banned user*/
+	if($routeParams.user === $rootScope.bannad){
+		$scope.bannedmessage = false;
+		$scope.bannad = undefined;
 	}
 });
 
@@ -145,10 +149,10 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 
 
-	$scope.model = { selected : ""};
+	//$scope.model = { selected : ""};
 
 	$scope.kickUser = function(user){
-		$scope.model.selected = user;
+		//$scope.model.selected = user;
 		var kick = confirm("Are you sure you want to kick " + user + "?");
 		
 		if(kick === true){
@@ -159,9 +163,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			};
 
 			socket.emit('kick', kickObj, function (kicked){
-				console.log("emitting bitch");
 				if(!kicked){
-					
 					 alert("Kick error occurred. Are you sure you are op"); //TODO: point to op if he want's someone kicked out	 
 				}
 
@@ -170,14 +172,39 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 	//user that has been kicked by op should be redirected to lobby
 	socket.on('kicked', function (room, kickeduser, operator){
-		console.log("kicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
+		//console.log("kicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
 		//redirect kicked user back to lobby
 		if(kickeduser === $scope.currentUser){
-			console.log("inside kicked" + "current user is "+ kickeduser);
+			//console.log("inside kicked" + "current user is "+ kickeduser);
 			$rootScope.sparkad = kickeduser;
 			console.log($rootScope.sparkad);
 			$location.path('/rooms/' + kickeduser);
 			
+		}
+	});
+
+	$scope.banUser = function(user){
+		var ban = confirm("Do you want to ban " + user + " from the chat?");
+		if(ban === true){
+
+			var banObj = {
+				user: user,
+				room: $scope.currentRoom
+			};
+
+			socket.emit('ban', banObj, function (banned){
+				if(!banned){
+					alert("Error occured, only ops can ban people");
+				}
+			});
+		}
+	};
+
+	socket.on('banned', function (room, banneduser, operator){
+
+		if(banneduser === $scope.currentUser){
+			$rootScope.bannad = banneduser;
+			$location.path('/rooms/' + banneduser);
 		}
 	});
 

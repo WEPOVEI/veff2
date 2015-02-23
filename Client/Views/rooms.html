@@ -15,11 +15,17 @@
 		</ul>
 	</div>
 	<div class="col-md-4" ng-hide="kickedmessage">
-		<div class="alert alert-danger" role="alert">
-  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  			<span class="sr-only">Error:</span>
-  			You have been kicked out of {{room}} by {{kickedby}} Please behave yourself.
+		<div class="alert alert-warning" role="alert">
+  			<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+  			<span class="sr-only">Error</span>
+  			You have been kicked out of the chat room. Please behave yourself.
 		</div>
 	</div>
-
+	<div class="col-md-4" ng-hide="bannedmessage">
+		<div class="alert alert-danger" role="alert">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  			<span class="sr-only">Error</span>
+  			You have been banned. You will not be able to re-enter this chat.
+		</div>
+	</div>
 </div>
