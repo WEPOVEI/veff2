@@ -83,16 +83,18 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.submitRoom = function(){
 			console.log("here");
 		//$scope.rooms.push($scope.roomname);
-		var newRoomObj = {
-			room: $scope.roomname
-			//pass : $scope.pass
-		};
-		socket.emit('joinroom', newRoomObj, function (success, reason){
-			if (!success){
-				$scope.errorMessage = reason;
-			}
-		});
-		$('#newRoom').val('');
+		if($scope.roomname !== undefined){
+			var newRoomObj = {
+				room: $scope.roomname
+				//pass : $scope.pass
+			};
+			socket.emit('joinroom', newRoomObj, function (success, reason){
+				if (!success){
+					$scope.errorMessage = reason;
+				}
+			});
+			$('#newRoom').val('');
+		}	
 	};
 	/* show warning for kicked user*/
 
@@ -113,7 +115,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	/*show warning for banned user*/
 	if($routeParams.user === $rootScope.bannad){
 		$scope.bannedmessage = false;
-		$scope.bannad = undefined;
+		$rootScope.bannad = undefined;
 	}
 });
 
@@ -150,6 +152,8 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		if (!success)
 		{
 			$scope.errorMessage = reason;
+			$rootScope.bannad = $scope.currentUser;
+			$location.path('/rooms/' + $scope.currentUser);
 		}
 	});
 
