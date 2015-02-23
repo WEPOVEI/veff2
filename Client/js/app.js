@@ -271,7 +271,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	});
 
 	$scope.deopUser = function (user){
-		var deopuser = confirm("you are about to deop " + user  +". Are you sure you want to proceed?" + user + " will lose all op privileges.");
+		var deopuser = confirm("you are about to deop " + user  +". Are you sure you want to proceed? " + user + " will lose all op privileges.");
 		if(deopuser === true){
 			deopObj = {
 				user : user,
@@ -279,7 +279,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			};
 			socket.emit('deop', deopObj, function (deopped){
 				if(!deopped){
-					alert("Error occured, only ops can deop");
+					alert("Error occured, only ops can deop or maybe that user was never an op!");
 				}
 			});
 		}
