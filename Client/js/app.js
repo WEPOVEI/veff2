@@ -165,7 +165,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	$scope.kickUser = function(user){
 		/* current user won't kick himself */
-		if(user != scope.currentUser){
+		if(user !== $scope.currentUser){
 			var kick = confirm("Are you sure you want to kick " + user + "?");
 		}
 		else{
