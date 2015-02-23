@@ -46,13 +46,14 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 		}
 	};
 
+	$("#nickname").keyup(function(event){
+	    if(event.keyCode == 13){
+	        $("#login").click();
+	    }
+	});
+
 	socket.emit('users');
 	socket.on('userlist', function (listofusers){
-		console.log("userlist listening");
-		/*for(var us in listofusers){
-			console.log(us);
-			$scope.activeusers.push(us);
-		}*/
 		$scope.activeusers = listofusers;
 	});
 });
@@ -97,7 +98,12 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			$('#newRoom').val('');
 		}	
 	};
-	/* show warning for kicked user*/
+
+	$("#newRoom").keyup(function(event){
+	    if(event.keyCode == 13){
+	        $("#submitRoom").click();
+	    }
+	});
 
 	socket.on('updateRooms', function (room){
 		if(room !== undefined){
@@ -171,6 +177,12 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$('#comment').val('');
 		}
 	};
+
+	$("#comment").keyup(function(event){
+	    if(event.keyCode == 13){
+	        $("#addComment").click();
+	    }
+	});
 
 	$scope.returnLobby = function(){
 		socket.emit('partroom', $scope.currentRoom);
@@ -294,6 +306,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$('#pm').val('');
 		}
 	};
+
 	socket.on('recv_privatemsg', function (username, message){
 		console.log("recv");
 		console.log(username + "fekk message");
@@ -304,6 +317,12 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			};
 			$scope.pmHistory.push(pm);
 		}
+	});
+
+	$("#pm").keyup(function(event){
+	    if(event.keyCode == 13){
+	        $("#sendPM").click();
+	    }
 	});
 
 	$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
