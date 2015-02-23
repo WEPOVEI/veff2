@@ -130,7 +130,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
-		$scope.currentUsers = users;
+		if(roomName === $scope.currentRoom){
+			$scope.currentUsers = users;
+		}
 	});
 	socket.on('updatechat', function (room, messages) {
 		$scope.commentHistory = messages;
@@ -228,7 +230,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		console.log("pm " + $scope.pm);	
 
 		if($scope.pm === '') {
-			$scope.emptyComment = 'Please write a comment!';
+			$scope.errorPM = 'Please write a comment!';
+		}else if($scope.pmTo == ''){
+			$scope.errorPM = 'Please select a user';
 		}else {
 			var pmObj = {
 				nick : $scope.pmTo,
@@ -245,11 +249,13 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	socket.on('recv_privatemsg', function (username, message){
 		console.log("recv");
 		console.log(username + "fekk message");
-		var pm = {
-			nick : username,
-			message : message
-		};
-		$scope.pmHistory.push(pm);
+		if(username !== undefined && message !== undefined){
+			var pm = {
+				nick : username,
+				message : message
+			};
+			$scope.pmHistory.push(pm);
+		}
 	});
 
 	$scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
