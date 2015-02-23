@@ -139,7 +139,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.pmHistory = [];
 	$scope.selfkick = true;
 	$scope.oppedmessage = true;
-  	$scope.deopped = '';
+  	$scope.deoppedmessage = '';
 	
 
 
@@ -297,10 +297,12 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			});
 		}
 	};
-	socket.on('deop', function (room, deoppeduser, operator){
+	socket.on('deopped', function (room, deoppeduser, operator){
 		console.log("listening to deop");
+		console.log(deoppeduser + $scope.currentUser);
 		if(deoppeduser === $scope.currentUser){
-			$scope.deopped = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
+			console.log("why no message!");
+			$scope.deoppedmessage = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
 		}
 	});
 
