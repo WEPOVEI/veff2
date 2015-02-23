@@ -71,7 +71,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	};
 	$scope.submitRoom = function(){
 			console.log("here");
-		$scope.rooms.push($scope.roomname);
+		//$scope.rooms.push($scope.roomname);
 		var newRoomObj = {
 			room: $scope.roomname
 			//pass : $scope.pass
@@ -80,11 +80,26 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 			if (!success){
 				$scope.errorMessage = reason;
 			}
-			else
-				console.log("ekkert ves");
 		});
+		$('#newRoom').val('');
 	};
+<<<<<<< HEAD
 	/* show warning for kicked user*/
+=======
+
+	socket.on('updateRooms', function (room){
+		if(room !== undefined){
+			console.log("adding room");
+			$scope.rooms.push(room);
+		}
+		else{
+			console.log("not adding room");
+		}
+	});
+
+
+	console.log("LESU MIG " + $routeParams.user + " " + $rootScope.sparkad);
+>>>>>>> a8157c77207792c12e2e18d8f3f7675571415964
 	if($routeParams.user === $rootScope.sparkad){
 		console.log("jallajallajallajalla");
 		$scope.kickedmessage = false;
