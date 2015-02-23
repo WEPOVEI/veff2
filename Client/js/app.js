@@ -138,6 +138,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.oppedmessage = true;
   	$scope.deoppedmessage = '';
 
+
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
 		if(roomName === $scope.currentRoom){
