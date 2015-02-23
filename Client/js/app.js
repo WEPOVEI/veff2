@@ -48,11 +48,13 @@ ChatClient.controller('LoginController', function ($scope, $location, $rootScope
 
 ChatClient.controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
-	$scope.rooms =  [];//['Room 1','Room 2','Room 3','Room 4','Room 5'];
+	$scope.rooms =  [];
 	$scope.currentUser = $routeParams.user;
 	$scope.hidden = true;
 	$scope.kickedmessage = true; 
 	$scope.bannedmessage = true;
+	$scope.activeusers = [];
+	
 
 
 	socket.emit('rooms');
@@ -168,6 +170,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		if(user !== $scope.currentUser){
 			var kick = confirm("Are you sure you want to kick " + user + "?");
 		}
+
 		else{
 			$scope.selfkick = false;
 		}
