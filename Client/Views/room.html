@@ -28,7 +28,7 @@
 	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
 		{{emptyComment}}
 	</div>
-	<button type="button" class="btn btn-primary" ng-click="addComment()">Add Comment</button>
+	<button type="button" class="btn btn-primary" id="addComment" ng-click="addComment()">Add Comment</button>
 </div>
 <!--new for opped users-->
 <div class="col-md-3">
@@ -99,6 +99,6 @@
 	<div class="alert alert-danger" ng-cloak ng-show="errorPM != ''">
 		{{errorPM}}
 	</div>
-	<button type="button" class="btn btn-primary" ng-click="sendPM()">Send message</button>
+	<button type="button" class="btn btn-primary" id="sendPM" ng-click="sendPM()">Send message</button>
 </div>
 	<!-- Private msg gluggi  endar-->
