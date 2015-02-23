@@ -83,9 +83,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 		});
 		$('#newRoom').val('');
 	};
-<<<<<<< HEAD
 	/* show warning for kicked user*/
-=======
 
 	socket.on('updateRooms', function (room){
 		if(room !== undefined){
@@ -97,11 +95,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 		}
 	});
 
-
-	console.log("LESU MIG " + $routeParams.user + " " + $rootScope.sparkad);
->>>>>>> a8157c77207792c12e2e18d8f3f7675571415964
 	if($routeParams.user === $rootScope.sparkad){
-		console.log("jallajallajallajalla");
 		$scope.kickedmessage = false;
 		$rootScope.sparkad = undefined;
 	}
