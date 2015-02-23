@@ -140,8 +140,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.selfkick = true;
 	$scope.oppedmessage = true;
   	$scope.deoppedmessage = '';
-	
-
 
 
 	socket.on('updateusers', function (roomName, users, ops) {
