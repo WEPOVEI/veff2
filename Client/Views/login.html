@@ -18,8 +18,11 @@
 		</div>
 	</div>
 	<div class="col-md-4">
-		<ul>
-			<li ng-repeat="active in activeusers">{{active}}</li>
-		</ul>
+		<div class="dropdown">
+			<h4>Currently active users</h4>
+			<ul>
+				<li ng-repeat="active in activeusers">{{active}}</li>
+			</ul>
+		</div>
 	</div>
 </div>
