@@ -83,8 +83,8 @@
 
 		<input type="text" class="form-control" id="pm" ng-model="pm" />
 	</div>
-	<div class="alert alert-danger" ng-cloak ng-show="emptyComment != ''">
-		{{emptyComment}}
+	<div class="alert alert-danger" ng-cloak ng-show="errorPM != ''">
+		{{errorPM}}
 	</div>
 	<button type="button" class="btn btn-primary" ng-click="sendPM()">Send message</button>
 </div>
