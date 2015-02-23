@@ -117,6 +117,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.hide = true;
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
+	$scope.selfkick = true;
 /* scope variables for kicked function */
 	
 
@@ -163,9 +164,14 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	//$scope.model = { selected : ""};
 
 	$scope.kickUser = function(user){
-		//$scope.model.selected = user;
-		var kick = confirm("Are you sure you want to kick " + user + "?");
-		
+		/* current user won't kick himself */
+		if(user != scope.currentUser){
+			var kick = confirm("Are you sure you want to kick " + user + "?");
+		}
+		else{
+			$scope.selfkick = false;
+		}
+
 		if(kick === true){
 
 			kickObj={
@@ -173,12 +179,16 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 				room: $scope.currentRoom
 			};
 
-			socket.emit('kick', kickObj, function (kicked){
-				if(!kicked){
-					 alert("Kick error occurred. Are you sure you are op"); //TODO: point to op if he want's someone kicked out	 
-				}
+			/*op cannot kick himself*/
+			if(user != $scope.currentUser){
 
-			});
+				socket.emit('kick', kickObj, function (kicked){
+					if(!kicked){
+					 	alert("Kick error occurred. Are you sure you are op"); //TODO: point to op if he want's someone kicked out	 
+					}
+
+				});
+			}
 		}
 	};
 	//user that has been kicked by op should be redirected to lobby
