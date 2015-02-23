@@ -79,12 +79,9 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 
 	//New Room button clicked, user wants to create a new rooom 
 	$scope.newRoom = function(){
-		console.log("I clicked on das Button");
 		$scope.hidden = !$scope.hidden; //show/hide
 	};
 	$scope.submitRoom = function(){
-			console.log("here");
-		//$scope.rooms.push($scope.roomname);
 		if($scope.roomname !== undefined){
 			var newRoomObj = {
 				room: $scope.roomname
@@ -107,11 +104,7 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 
 	socket.on('updateRooms', function (room){
 		if(room !== undefined){
-			console.log("adding room");
 			$scope.rooms.push(room);
-		}
-		else{
-			console.log("not adding room");
 		}
 	});
 
@@ -140,9 +133,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.selfkick = true;
 	$scope.oppedmessage = true;
   	$scope.deoppedmessage = '';
-	
-
-
 
 	socket.on('updateusers', function (roomName, users, ops) {
 		// TODO: Check if the roomName equals the current room !
@@ -224,12 +214,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 	//user that has been kicked by op should be redirected to lobby
 	socket.on('kicked', function (room, kickeduser, operator){
-		//console.log("kicked from room: " + room + " " + "userkicked: " + kickeduser + " " + "kicked by " +operator);
 		//redirect kicked user back to lobby
 		if(kickeduser === $scope.currentUser){
-			//console.log("inside kicked" + "current user is "+ kickeduser);
 			$rootScope.sparkad = kickeduser;
-			console.log($rootScope.sparkad);
 			$location.path('/rooms/' + kickeduser);
 			
 		}
@@ -276,7 +263,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		}
 	};
 	socket.on('opped', function (room, oppeduser, operator){
-		console.log("received opp");
 		if(oppeduser === $scope.currentUser){
 			$scope.oppedmessage = false;
 		}
@@ -298,19 +284,13 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		}
 	};
 	socket.on('deopped', function (room, deoppeduser, operator){
-		console.log("listening to deop");
-		console.log(deoppeduser + $scope.currentUser);
 		if(deoppeduser === $scope.currentUser){
-			console.log("why no message!");
 			$scope.deoppedmessage = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
 		}
 	});
 
 
 	$scope.sendPM = function(){
-		console.log("pmTo " + $scope.pmTo);
-		console.log("pm " + $scope.pm);	
-
 		if($scope.pm === '') {
 			$scope.errorPM = 'Please write a comment!';
 		}else if($scope.pmTo == ''){
@@ -330,8 +310,6 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	};
 
 	socket.on('recv_privatemsg', function (username, message){
-		console.log("recv");
-		console.log(username + "fekk message");
 		if(username !== undefined && message !== undefined){
 			var pm = {
 				nick : username,
