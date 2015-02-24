@@ -43,6 +43,7 @@ angular.module('ChatClient').controller('RoomController', function ($scope, $loc
 					roomName : $routeParams.room,
 					msg : $scope.comment
 			};
+			$scope.comment = '';
 			socket.emit('sendmsg', objMessage);
 			$('#comment').val('');
 		}
@@ -199,6 +200,7 @@ angular.module('ChatClient').controller('RoomController', function ($scope, $loc
 				nick : $scope.pmTo,
 				message : $scope.pm
 			};
+			$scope.pm = '';
 			socket.emit('privatemsg', pmObj, function (success){
 				if(!success){
 					$scope.errorPM = "Cannot send message";
