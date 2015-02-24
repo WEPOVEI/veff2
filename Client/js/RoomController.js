@@ -84,7 +84,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 				socket.emit('kick', kickObj, function (kicked){
 					if(!kicked){
-					 	alert("Kick error occurred. Are you sure you are op"); //TODO: point to op if he want's someone kicked out	 
+					 	$scope.selfkickbanopdeop = "Kick error occurred. Are you sure you are op";
 					}
 
 				});
@@ -119,7 +119,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 			socket.emit('ban', banObj, function (banned){
 				if(!banned){
-					alert("Error occured, only ops can ban people");
+					$scope.selfkickbanopdeop = "Error occured, only ops can ban people";
 				}
 			});
 		}
@@ -148,7 +148,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			};
 			socket.emit('op', opObj, function (opped){
 				if(!opped){
-					alert("Error occured, only ops can op another users");
+					$scope.selfkickbanopdeop = "Error occured, only ops can op another users";
 				}
 			});
 		}
@@ -176,7 +176,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			};
 			socket.emit('deop', deopObj, function (deopped){
 				if(!deopped){
-					alert("Error occured, only ops can deop or maybe that user was never an op!");
+					$scope.selfkickbanopdeop = "Error occured, only ops can deop or maybe that user was never an op!";
 				}
 			});
 		}
