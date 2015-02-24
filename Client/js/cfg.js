@@ -1,4 +1,4 @@
-ChatClient.config(
+angular.module('ChatClient').config(
 	function ($routeProvider) {
 		$routeProvider
 			.when('/login', { templateUrl: 'Views/login.html', controller: 'LoginController' })

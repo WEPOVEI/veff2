@@ -5,6 +5,7 @@ module.exports = function ( grunt ) {
 		// jshint task configuration goes here.
 		src: ['Client/**/*.js', '!Client/**/socket.io.min.js', '!Client/**/socket-factory.js'],
 		options: {
+			browser: true,
 			curly:  true,
 			  immed:  true,
 			  newcap: true,
@@ -15,6 +16,7 @@ module.exports = function ( grunt ) {
 			  node:   true,
 			  undef:  true,
 			  globals: {
+				
 				_:       false,
 				jQuery:  false,
 				angular: false,

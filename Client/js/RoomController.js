@@ -1,4 +1,4 @@
-ChatClient.controller('RoomController', function ($scope, $location, $rootScope, $routeParams, socket) {
+angular.module('ChatClient').controller('RoomController', function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentRoom = $routeParams.room;
 	$scope.currentUser = $routeParams.user;
 	$scope.currentUsers = [];
@@ -64,7 +64,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 		/* current user won't kick himself */
 		var kick = false;
 		if(user !== $scope.currentUser){
-			kick = confirm("Are you sure you want to kick " + user + "?");
+			kick = window.confirm("Are you sure you want to kick " + user + "?");
 		}
 
 		else{
@@ -104,7 +104,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.banUser = function(user){
 		var ban = false;
 		if(user !== $scope.currentUser){
-			ban = confirm("Do you want to ban " + user + " from the chat?");
+			ban = window.confirm("Do you want to ban " + user + " from the chat?");
 		}
 		else{
 			$scope.selfkickbanopdeop = "Unfortunately you can not ban your self. If you really want to be banned i suggest you op another user and then get him to ban you!";
@@ -136,7 +136,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.opUser = function (user){
 		var opuser = false;
 		if(user !== $scope.currentUser){
-			opuser = confirm("do you want to op " + user + "?");
+			opuser = window.confirm("do you want to op " + user + "?");
 		}
 		else{
 			$scope.selfkickbanopdeop = "Are you trying to op yourself? That's not going to happen.";
@@ -164,7 +164,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.deopUser = function (user){
 		var deopuser = false;
 		if(user !== $scope.currentUser){
-			deopuser = confirm("you are about to deop " + user  +". Are you sure you want to proceed? " + user + " will lose all op privileges.");
+			deopuser = window.confirm("you are about to deop " + user  +". Are you sure you want to proceed? " + user + " will lose all op privileges.");
 		}
 		else{
 			$scope.selfkickbanopdeop = "Trying to deop yourself? i suggest you just leave the chat and re-enter";
