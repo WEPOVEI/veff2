@@ -9,14 +9,14 @@
 		<div class="chatlist">
 			<ul class="media-list">
 			    <li class="media" ng-repeat="comment in commentHistory" on-finish-render="ngRepeatFinished">
-			      <a class="pull-left" href="#">
+			     	<a class="pull-left" href="#">
 			         <img class="media-object" src="http://www.adweek.com/socialtimes/files/2014/08/anonymous.jpg" 
 			         alt="Generic placeholder image" height="42" width="65">
-			      </a>
-			      <div class="media-body">
-			         <h4 class="media-heading">{{comment.nick}}</h4>
-			         <p>{{comment.message}}</p>
-			         <span class="date sub-text">{{comment.timestamp}}</span>
+			      	</a>
+			      	<div class="media-body"> 
+			        	<h4 class="media-heading">{{comment.nick}}</h4>
+			        	<p>{{comment.message}}</p>
+			         	<span class="date sub-text">{{comment.timestamp}}</span>
 			      </div>
 			   </li>
 			</ul>
@@ -32,10 +32,10 @@
 </div>
 <!--new for opped users-->
 <div class="col-md-3">
-	<div class="alert alert-info" role="alert" ng-hide="oppedmessage">
+	<div class="alert alert-info" role="alert" ng-cloak ng-show="oppedmessage">
   		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
   		<span class="sr-only">Error</span>
-  		Congratulations! You are now officially an operator of this room. But remember, with great power comes great responsibility!
+  		{{oppedmessage}}
 	</div>
 </div>
 <div class="col-md-3">
@@ -68,10 +68,10 @@
 			</li>
 		</ul>
 	</div>
-	<div class="alert alert-warning" role="alert" ng-hide="selfkick">
+	<div class="alert alert-warning" role="alert" ng cloak ng-show="selfkickban != ''">
   		<span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
   		<span class="sr-only">Error</span>
-  		Unfortunately you can not kick your self out of the chat. Just leave the room if you wish to leave.
+  		{{selfkickban}}
 	</div>
 </div>
 
