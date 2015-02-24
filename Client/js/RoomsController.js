@@ -6,8 +6,6 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 	$scope.kickedmessage = true; 
 	$scope.bannedmessage = true;
 	
-
-
 	socket.emit('rooms');
 	socket.on('roomlist', function (roomser) {
 		for(var room in roomser){
@@ -17,8 +15,11 @@ ChatClient.controller('RoomsController', function ($scope, $location, $rootScope
 		}
 	});
 
-	$scope.disconnect = function(){
-		alert("Vhinnir!");
+	// Disconnect
+	$scope.disco = function(){
+		console.log("disconnecting");
+		socket.emit('disco-net');
+		$location.path('/login');
 	};
 
 	//New Room button clicked, user wants to create a new rooom 
