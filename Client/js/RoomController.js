@@ -62,8 +62,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	$scope.kickUser = function(user){
 		/* current user won't kick himself */
+		var kick = false;
 		if(user !== $scope.currentUser){
-			var kick = confirm("Are you sure you want to kick " + user + "?");
+			kick = confirm("Are you sure you want to kick " + user + "?");
 		}
 
 		else{
@@ -171,7 +172,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.sendPM = function(){
 		if($scope.pm === '') {
 			$scope.errorPM = 'Please write a comment!';
-		}else if($scope.pmTo == ''){
+		}else if($scope.pmTo === ''){
 			$scope.errorPM = 'Please select a user';
 		}else {
 			var pmObj = {

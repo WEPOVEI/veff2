@@ -9,5 +9,5 @@ ChatClient.directive('onFinishRender', function ($timeout) {
                 });
             }
         }
-    }
+    };
 });
