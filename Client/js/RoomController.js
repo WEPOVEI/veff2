@@ -56,11 +56,9 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 	$scope.returnLobby = function(){
 		socket.emit('partroom', $scope.currentRoom);
-		$location.path('/rooms/' + $scope.nickname);
+		$location.path('/rooms/' + $scope.currentUser);
 	};
 
-
-	//$scope.model = { selected : ""};
 
 	$scope.kickUser = function(user){
 		/* current user won't kick himself */
