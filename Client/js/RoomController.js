@@ -9,7 +9,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 	$scope.hide = true;
 	$scope.errorPM = '';
 	$scope.pmHistory = [];
-	$scope.selfkickban = '';
+	$scope.selfkickbanopdeop = '';
 	$scope.oppedmessage = '';
   	$scope.deoppedmessage = '';
 
@@ -68,7 +68,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 		else{
 			/*warning message if current user tries to kick himself */
-			$scope.selfkickban = "Unfortunately you can not kick your self out of the chat. Just leave the room if you wish to leave.";
+			$scope.selfkickbanopdeop = "Unfortunately you can not kick your self out of the chat. Just leave the room if you wish to leave.";
 		}
 
 		if(kick === true){
@@ -105,7 +105,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			var ban = confirm("Do you want to ban " + user + " from the chat?");
 		}
 		else{
-			$scope.selfkickban = "Unfortunately you can not ban your self. If you really want to be banned i suggest you op another user and then get him to ban you!";
+			$scope.selfkickbanopdeop = "Unfortunately you can not ban your self. If you really want to be banned i suggest you op another user and then get him to ban you!";
 		}
 		
 		if(ban === true){
@@ -137,7 +137,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			var opuser = confirm("do you want to op " + user + "?");
 		}
 		else{
-			$scope.oppedmessage = "Are you trying to op yourself? That's not going to happen."
+			$scope.selfkickbanopdeop = "Are you trying to op yourself? That's not going to happen."
 		}
 		if(opuser === true){
 			opObj = {
@@ -164,7 +164,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			var deopuser = confirm("you are about to deop " + user  +". Are you sure you want to proceed? " + user + " will lose all op privileges.");
 		}
 		else{
-			$scope.deoppedmessage = "Trying to deop yourself? i suggest you just leave the chat and re-enter";
+			$scope.selfkickbanopdeop = "Trying to deop yourself? i suggest you just leave the chat and re-enter";
 		}
 		if(deopuser === true){
 			deopObj = {
@@ -178,7 +178,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			});
 		}
 	};
-	
+
 	socket.on('deopped', function (room, deoppeduser, operator){
 		if(deoppeduser === $scope.currentUser){
 			$scope.deoppedmessage = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
