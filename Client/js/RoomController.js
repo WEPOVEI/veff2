@@ -74,7 +74,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 
 		if(kick === true){
 
-			kickObj={
+			var kickObj={
 				user: user,
 				room: $scope.currentRoom
 			};
@@ -142,7 +142,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$scope.selfkickbanopdeop = "Are you trying to op yourself? That's not going to happen.";
 		}
 		if(opuser === true){
-			opObj = {
+			var opObj = {
 				user: user,
 				room: $scope.currentRoom
 			};
@@ -170,7 +170,7 @@ ChatClient.controller('RoomController', function ($scope, $location, $rootScope,
 			$scope.selfkickbanopdeop = "Trying to deop yourself? i suggest you just leave the chat and re-enter";
 		}
 		if(deopuser === true){
-			deopObj = {
+			var deopObj = {
 				user : user,
 				room: $scope.currentRoom
 			};
