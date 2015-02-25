@@ -1,0 +1,23 @@
+{
+  "name": "wepovei",
+  "version": "0.0.0",
+  "homepage": "https://github.com/WEPOVEI/veff2",
+  "authors": [
+    "(Vignir Karl Gylfason <vignirk@gmail.com>)(Einar Logi Hreinsson <einarlogi14@gmail.com>) (Petur Bergmann <peturh13@ru.is>)"
+  ],
+  "description": "Chat Application",
+  "main": "Client/css/main/css",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.14",
+    "angular-route": "~1.3.14",
+    "bootstrap": "~3.3.2"
+  }
+}
