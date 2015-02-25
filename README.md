@@ -22,3 +22,4 @@ it will be delivered.
 7. There are no advertised topics on the available chat rooms. So just have fun and explore!
 
 8. Logging out will send you back to the login page. Your nick name is now free for everyone to grab.
+9. If an operator bans you from a chat room you'll be banned forever!(unless you logout and change username)
