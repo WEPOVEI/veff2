@@ -157,7 +157,9 @@ angular.module('ChatClient').controller('RoomController', function ($scope, $loc
 
 	socket.on('opped', function (room, oppeduser, operator){
 		if(oppeduser === $scope.currentUser){
+			$scope.deoppedmessage = '';
 			$scope.oppedmessage = "Congratulations! You are now officially an operator of this room. But remember, with great power comes great responsibility!";
+			
 		}
 
 	});
@@ -185,8 +187,11 @@ angular.module('ChatClient').controller('RoomController', function ($scope, $loc
 
 	socket.on('deopped', function (room, deoppeduser, operator){
 		if(deoppeduser === $scope.currentUser){
+			/* quick fix to get rid of opped message above*/
+			$scope.oppedmessage = '';
 			$scope.deoppedmessage = "Unfortunately you've just been deopped by " + operator + ". If that seems unfair to you I suggest that you take it up with him. Why not send him a private message";
 		}
+
 	});
 
 
