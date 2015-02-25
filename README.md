@@ -13,3 +13,6 @@ Be careful about who you op.
 it will be delivered.
 
 6. You will not be able to perform any actions(op, deop, kick, ban) on yourself under any circumstances.
+7. There are no advertised topics on the available chat rooms. So just have fun and explore!
+
+8. Logging out will send you back to the login page. Your nick name is now free for everyone to grab.
