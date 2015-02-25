@@ -1,5 +1,6 @@
-var ChatClient = angular.module('ChatClient', ['ngRoute']);
+var ChatClient = angular.module('ChatClient',['ngRoute']);
 angular.module('ChatClient').config(
+	['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider
 			.when('/login', { templateUrl: 'Views/login.html', controller: 'LoginController' })
@@ -9,9 +10,9 @@ angular.module('ChatClient').config(
 	  			redirectTo: '/login'
 			});
 	}
-);
+]);
 // Allows us to execute code after ngrepeat
-angular.module('ChatClient').directive('onFinishRender', function ($timeout) {
+angular.module('ChatClient').directive('onFinishRender',['$timeout', function ($timeout) {
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
@@ -22,8 +23,8 @@ angular.module('ChatClient').directive('onFinishRender', function ($timeout) {
             }
         }
     };
-});
-angular.module('ChatClient').controller('LoginController', function ($scope, $location, $rootScope, $routeParams, socket) {
+}]);
+angular.module('ChatClient').controller('LoginController',['$scope', '$location', '$rootScope', '$routeParams', 'socket', function ($scope, $location, $rootScope, $routeParams, socket) {
 	
 	$scope.errorMessage = '';
 	$scope.nickname = '';
@@ -53,8 +54,8 @@ angular.module('ChatClient').controller('LoginController', function ($scope, $lo
 	socket.on('userlist', function (listofusers){
 		$scope.activeusers = listofusers;
 	});
-});
-angular.module('ChatClient').controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
+}]);
+angular.module('ChatClient').controller('RoomsController',['$scope', '$location', '$rootScope', '$routeParams', 'socket', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.rooms =  [];
 	$scope.currentUser = $routeParams.user;
@@ -118,8 +119,8 @@ angular.module('ChatClient').controller('RoomsController', function ($scope, $lo
 		$scope.bannedmessage = false;
 		$rootScope.bannad = undefined;
 	}
-});
-angular.module('ChatClient').controller('RoomController', function ($scope, $location, $rootScope, $routeParams, socket) {
+}]);
+angular.module('ChatClient').controller('RoomController',['$scope', '$location', '$rootScope', '$routeParams', 'socket', function ($scope, $location, $rootScope, $routeParams, socket) {
 	$scope.currentRoom = $routeParams.room;
 	$scope.currentUser = $routeParams.user;
 	$scope.currentUsers = [];
@@ -357,4 +358,4 @@ angular.module('ChatClient').controller('RoomController', function ($scope, $loc
     	$(".chatlist").scrollTop($(".chatlist")[0].scrollHeight);
     	$(".pmlist").scrollTop($(".pmlist")[0].scrollHeight);
 	});
-});
+}]);

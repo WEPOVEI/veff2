@@ -1,4 +1,4 @@
-angular.module('ChatClient').controller('RoomsController', function ($scope, $location, $rootScope, $routeParams, socket) {
+angular.module('ChatClient').controller('RoomsController',['$scope', '$location', '$rootScope', '$routeParams', 'socket', function ($scope, $location, $rootScope, $routeParams, socket) {
 	// TODO: Query chat server for active rooms
 	$scope.rooms =  [];
 	$scope.currentUser = $routeParams.user;
@@ -62,4 +62,4 @@ angular.module('ChatClient').controller('RoomsController', function ($scope, $lo
 		$scope.bannedmessage = false;
 		$rootScope.bannad = undefined;
 	}
-});
+}]);

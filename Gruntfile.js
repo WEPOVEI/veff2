@@ -35,7 +35,14 @@ module.exports = function ( grunt ) {
 		            '!Client/**/socket.io.min.js', '!Client/**/socket-factory.js'],
 			  dest: 'Client/dist/built.js'
 			}
-		}
+		},
+		uglify: {
+   			my_target: {
+      			files: {
+        			'Client/dist/built.min.js': ['Client/dist/built.js']
+      			}
+    		}
+  		}
 	});
-	grunt.registerTask('default', ['jshint', 'concat']);
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 }

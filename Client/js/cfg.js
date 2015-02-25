@@ -1,4 +1,5 @@
 angular.module('ChatClient').config(
+	['$routeProvider',
 	function ($routeProvider) {
 		$routeProvider
 			.when('/login', { templateUrl: 'Views/login.html', controller: 'LoginController' })
@@ -8,4 +9,4 @@ angular.module('ChatClient').config(
 	  			redirectTo: '/login'
 			});
 	}
-);
+]);

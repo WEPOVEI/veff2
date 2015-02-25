@@ -1,1 +1,1 @@
-var ChatClient = angular.module('ChatClient', ['ngRoute']);
+var ChatClient = angular.module('ChatClient',['ngRoute']);
