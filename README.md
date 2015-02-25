@@ -6,6 +6,14 @@ This amazing website was built with Angularjs, socket.io and n00by bootstrap
 3. Type in **grunt** which will build our project and spit out a minified file which will be located in the *dist* folder
 4. You will most likely need to open two terminal windows. In the first window open the *Client* folder and type **python -m SimpleHTTPServer**. In the second window go to *Server* folder and type **node chatserver.js**. You can also run scripts for these commands which are located in the folders.
 
+##Things that we changed in chatserver.js
+When a user has been opped he isn't deleted from the userlist.
+
+New Chatrooms update in real-time
+
+Minor changes to deop in chatserver.js. Now you can not deop a user who never was an operator.
+
+
 ##Few things that users should be aware of
 
 1. If you create a room then you will automatically become an operator of that particular room.
