@@ -5,9 +5,11 @@
 	<div class ="newRoom">
 		<button type="button" class="btn btn-primary" ng-click="newRoom()">New Room</button>
 		<div class="form-group" ng-hide="hidden">
-			<label for="roomname" class="control-label" >Name of chatroom</label>
-			<input type="text" class="form-control" id="newRoom" ng-model="roomname" placeholder="..." />
-			<button type="button" class="btn" id="submitRoom" ng-click="submitRoom()">Submit</button>           
+			<form>
+				<label for="roomname" class="control-label" >Name of chatroom</label>
+				<input type="text" class="form-control" id="newRoom" ng-model="roomname" placeholder="..." autofocus/>
+				<button type="button" class="btn" id="submitRoom" ng-click="submitRoom()">Submit</button> 
+			</form>          
 		</div>
 	</div>
 </div>
